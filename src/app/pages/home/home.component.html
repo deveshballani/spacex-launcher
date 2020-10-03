@@ -1,0 +1,30 @@
+<div class="row marginTop15">
+    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 filter-container" *ngIf="showSideFilter"> 
+        <spacex-filters></spacex-filters>
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12 mission-container">  
+        <ng-container *ngIf="(launchDetails | async)?.length > 0">
+            <div class="flex wrap">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 padding5 mission-card" *ngFor="let launch of launchDetails | async">
+                    <spacex-mission [launch]="launch"></spacex-mission>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="(launchDetails | async)?.length === 0 && !isLoading">
+            <div class="no-data">
+                SORRY! NO DATA FOUND.
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+            <div class="loader">
+                <img src="../../../assets/loader/loader.svg" alt="loading..." height="50px"/>
+            </div>
+        </ng-container>
+    
+        <div infiniteScroll
+            [infiniteScrollThrottle]="1000"
+            [fromRoot]="true"
+            (scrolled)="onScroll()">
+        </div>
+    </div>
+</div>

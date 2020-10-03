@@ -1,0 +1,12 @@
+<div class="header">
+    <div class="name">SpaceX Launch Programs</div>
+    <div class="filter">
+        <mat-icon
+            (click)="openFilterDialog()"
+            matBadgeColor="warn"
+            [matBadgeHidden]="appliedFilterCount === 0"
+            [matBadge]="appliedFilterCount"
+            matBadgeSize="small"
+        >filter_alt</mat-icon>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "spacex-launch-c1342": {
+      "hosting": {
+        "spacex": [
+          "spacex-launch-c1342"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+.box {
+    position: relative;
+    height: 380px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    min-width: 181px;
+    transition: 0.5s;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    border-radius: 6px;
+    overflow-y: auto;
+    background-color: white;
+    font-size: 13px;
+
+    .img-box {
+        width: 100%;
+        height: 40%;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 7px;
+        background: #dadada66;
+
+        img {
+            height: 100%;
+        }
+    }
+    .content {
+        height: 150px;
+        .detail, .addon {
+            margin-bottom: 7px;
+        }
+        .detail {
+            img {
+                vertical-align: middle;
+                margin-left: 5px;
+            }
+        }
+        .green {
+            color: #5ee15e;
+        }
+
+        .mission-name {
+            font-weight: 600;
+            color: #0096d6;
+            margin: 10px 0;
+        } 
+        .heading {
+            font-weight: 600;
+        }
+        ul.mission-ids-list {
+            margin-top: 5px;
+            margin-left: 40px;
+            margin-bottom: 0;
+        }
+
+    }
+}
+
+.dummy-image {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+.key-value {
+    display: flex;
+
+    div {
+        flex-basis: 50%;
+    }
+    div:last-child {
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .img-box {
+        height: 37% !important;
+    }
+} 
+
+@media screen and (max-width: 575px) {
+    .box {
+        max-width: 265px !important;
+        margin: 15px auto;
+    }
+}

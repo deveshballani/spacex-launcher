@@ -1,0 +1,39 @@
+<div class="filter-wrapper" [ngClass]="{'no-shadow': isPopup}" onselectstart="return false">
+    <div class="main-lable">Filters</div>
+    <div class="scrollable">
+        <div class="year-filter filter">
+            <div class="label-title">Launch Year</div>
+            <div class="options">
+                <div *ngFor="let yearPair of yearFilters" class="pair">
+                    <span class="option" *ngFor="let year of yearPair"
+                    [ngClass]="{'selected': appliedFilters.year == year}"
+                    (click)="yearToggle(year)">{{year}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter">
+            <div class="label-title">Successful Launch</div>
+            <div class="options">
+                <div class="pair">
+                    <span class="option" [ngClass]="{'selected': appliedFilters.launchSuccess == 'true'}"
+                     (click)="launchStatusToggle('true')">YES</span>
+                    <span class="option" [ngClass]="{'selected': appliedFilters.launchSuccess == 'false'}"
+                     (click)="launchStatusToggle('false')">NO</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter">
+            <div class="label-title">Successful Landing</div>
+            <div class="options">
+                <div class="pair">
+                    <span class="option" [ngClass]="{'selected': appliedFilters.landSuccess === 'true'}"
+                     (click)="landStatusToggle('true')">YES</span>
+                    <span class="option" [ngClass]="{'selected': appliedFilters.landSuccess === 'false'}"
+                     (click)="landStatusToggle('false')">NO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

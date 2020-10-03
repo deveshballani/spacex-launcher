@@ -1,0 +1,42 @@
+<div class="box">
+    <div class="img-box">
+        <img *ngIf="launch.launch_success !== null" [src]="launch.links.mission_patch_small" alt="SpaceX-img"/>
+        <img *ngIf="launch.launch_success === null" class="dummy-image" src="../../../../assets/images/rocket.png" alt="SpaceX-img"/>
+    </div>
+    <div class="content">
+        <div class="mission-name">{{launch.mission_name + ' #' + launch.flight_number}}</div>
+        <div class="mission-ids detail">
+            <div class="heading">Mission Ids:</div>
+            <ul class="mission-ids-list" *ngIf="launch.mission_id.length > 0">
+                <li *ngFor="let missionId of launch.mission_id">
+                    <span class="value">{{missionId}}</span>
+                </li>
+            </ul>
+            <ul class="mission-ids-list" *ngIf="launch.mission_id.length === 0">
+                <li> <span class="value">N/A</span> </li>
+            </ul>
+        </div>
+        <div class="detail key-value">
+           <div ><span class="heading">Launch Year: </span> </div>
+           <div><span class="value">{{launch.launch_year}}</span></div>
+        </div>
+        <div class="detail key-value" *ngIf="launch.launch_success !== null">
+            <div><span class="heading">Successfully Launched: </span></div>
+            <div *ngIf="launch.launch_success"><img src="../../../assets/icons/right.png" alt="True" width="20px" alt="true"></div>
+            <div *ngIf="!launch.launch_success"><img src="../../../assets/icons/wrong.png" alt="True" width="15px" alt="false"></div>
+        </div>
+        <div class="detail key-value" *ngIf="launch.launch_success !== null">
+            <div><span class="heading">Successfully Landed: </span></div>
+            <div *ngIf="isLandSuccess(launch.rocket) === true"><img src="../../../assets/icons/right.png" alt="True" width="20px"></div>
+            <div *ngIf="isLandSuccess(launch.rocket) === false"><img src="../../../assets/icons/wrong.png" alt="False" width="15px"></div>
+            <div *ngIf="isLandSuccess(launch.rocket) === undefined">N/A</div>
+        </div>
+        <div class="detail" *ngIf="launch.launch_success === null">
+            <div class="heading green addon">Launching Soon...</div>
+            <div class="addon key-value">
+                <div><span class="heading">Launching Date: </span></div>
+                <div><span class="value">{{launch.launch_date_local | date}}</span></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+.filter-wrapper {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    position: sticky;
+    top: 62px;
+}
+.no-shadow {
+    box-shadow: none !important;
+}
+
+.scrollable {
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    max-height: 650px;
+    scrollbar-width: none;
+}
+
+.main-lable {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 15px;
+}
+
+.filter {
+    margin-bottom:20px;
+    text-align: center;
+    .label-title {
+        display: inline-block;
+        text-align: center;
+        padding: 4px;
+        width: 150px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.644);
+    }
+    .options {
+        text-align: left;
+        div.option:hover {
+            background: #79b4ce;
+            color: white;
+        }
+        div.option.selected {
+            background: #0096d6;
+            color: white;
+        }
+    }
+}
+
+.sticky {
+    position: fixed;
+    width: 220px;
+}
+
+.pair {
+    margin: 7px 12px;
+    padding: 0 11px;
+
+    .option {
+        text-align: center;
+        display: inline-block;
+        margin: 5px 10px;
+        width: 80px;
+        padding: 4px 0;
+        cursor: pointer;
+        border-radius: 5px;
+        background: #c5e19b;
+        color: black;
+    }
+    .option:hover {
+        background: #a7db58;
+    }
+    .option.selected {
+        background: #7ccd00;
+    }
+}
+
+// Media Query
+
+@media screen and (max-width: 1199px) {
+    .pair {
+        padding: 0 !important;
+        .option {
+            width: 65px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .pair {
+        .option {
+            width: 60px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .options {
+        text-align: center !important;
+    }
+}
