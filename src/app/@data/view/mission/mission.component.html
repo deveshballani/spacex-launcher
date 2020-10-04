@@ -1,7 +1,9 @@
 <div class="box">
     <div class="img-box">
-        <img *ngIf="launch.launch_success !== null" [src]="launch.links.mission_patch_small" alt="SpaceX-img"/>
-        <img *ngIf="launch.launch_success === null" class="dummy-image" src="../../../../assets/images/rocket.png" alt="SpaceX-img"/>
+        <img *ngIf="launch.launch_success !== null; else noImg" [src]="launch.links.mission_patch_small" alt="SpaceX-img"/>
+        <ng-template #noImg>
+            <img class="dummy-image" src="../../../../assets/images/rocket.png" alt="SpaceX-img"/>
+        </ng-template>
     </div>
     <div class="content">
         <div class="mission-name">{{launch.mission_name + ' #' + launch.flight_number}}</div>
