@@ -1,4 +1,4 @@
-import { MissionComponent } from "./mission.component";
+import { MissionComponent } from './mission.component';
 
 describe('MissionComponent', () => {
     let component: MissionComponent;
