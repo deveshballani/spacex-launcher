@@ -16,6 +16,7 @@ import { ScrollBackgroundDirective } from './@data/directives/scroll-background.
 import { FiltersComponent } from './@data/view/filters/filters.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterDialogComponent } from './@data/dialogs/filter-dialog/filter-dialog.component';
+import { FooterComponent } from './@data/view/footer/footer.component';
 
 const MATERIAL_MODULES = [
   MatIconModule,
@@ -31,7 +32,8 @@ const MATERIAL_MODULES = [
     HeaderComponent,
     ScrollBackgroundDirective,
     FiltersComponent,
-    FilterDialogComponent
+    FilterDialogComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

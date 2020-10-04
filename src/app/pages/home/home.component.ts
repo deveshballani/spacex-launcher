@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   appliedFilters: AppliedFilters;
   isLoading = true;
   showSideFilter = true;
+  previouslyAppliedFilters: AppliedFilters;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -45,23 +46,14 @@ export class HomeComponent implements OnInit {
     this.getLaunchesDetails();
   }
 
-  isLandSuccess(rocket: any) {
-    let isSuccess = false;
-    for (const core of rocket.first_stage.cores) {
-      if (core.land_success) {
-        isSuccess = true;
-        break;
-      }
+  private onFilterChange(appliedFilters: AppliedFilters) {
+    if (!this.areSameFiltersAppliedInPreviousCall(appliedFilters)) {
+      this.offset = 0;
+      this.isLoading = true;
+      this.launchDetails.next([]);
+      this.appliedFilters = appliedFilters;
+      this.getLaunchesDetails(appliedFilters);
     }
-    return isSuccess;
-  }
-
-  onFilterChange(appliedFilters: AppliedFilters) {
-    this.offset = 0;
-    this.isLoading = true;
-    this.launchDetails.next([]);
-    this.appliedFilters = appliedFilters;
-    this.getLaunchesDetails(appliedFilters);
   }
 
   private getLaunchesDetails(appliedFilters?: AppliedFilters) {
@@ -70,6 +62,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.mainService.getAllLaunchProjects(filters)
     .subscribe((launches: any[]) => {
+      this.previouslyAppliedFilters = appliedFilters;
       const newLaunches = launches.slice(0, CONFIG.MIN_BATCH_SIZE);
       const currentLaunches = this.launchDetails.getValue();
       this.offset += launches.length;
@@ -92,5 +85,15 @@ export class HomeComponent implements OnInit {
       }
     }
     return filters;
+  }
+
+  private areSameFiltersAppliedInPreviousCall(appliedFilters: AppliedFilters) {
+    if (this.previouslyAppliedFilters) {
+      return this.previouslyAppliedFilters.year === appliedFilters.year
+      && this.previouslyAppliedFilters.landSuccess === appliedFilters.landSuccess
+      && this.previouslyAppliedFilters.launchSuccess === appliedFilters.launchSuccess;
+    } else {
+      return false;
+    }
   }
 }
