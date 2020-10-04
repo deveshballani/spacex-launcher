@@ -46,18 +46,7 @@ export class HomeComponent implements OnInit {
     this.getLaunchesDetails();
   }
 
-  isLandSuccess(rocket: any) {
-    let isSuccess = false;
-    for (const core of rocket.first_stage.cores) {
-      if (core.land_success) {
-        isSuccess = true;
-        break;
-      }
-    }
-    return isSuccess;
-  }
-
-  onFilterChange(appliedFilters: AppliedFilters) {
+  private onFilterChange(appliedFilters: AppliedFilters) {
     if (!this.areSameFiltersAppliedInPreviousCall(appliedFilters)) {
       this.offset = 0;
       this.isLoading = true;
