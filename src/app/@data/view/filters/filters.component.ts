@@ -41,7 +41,9 @@ export class FiltersComponent implements OnInit, OnDestroy {
           this.appliedFilters[key] = params[key];
         });
       }
-      this.emmitChanges();
+      setTimeout(() => {
+        this.emmitChanges();
+      });
     });
   }
 
@@ -49,7 +51,29 @@ export class FiltersComponent implements OnInit, OnDestroy {
     this.routerSubscription.unsubscribe();
   }
 
-  yearToggle(year) {
+  changeFilter(event: any) {
+    // Event Delegation
+    if (event.target.tagName !== 'SPAN') {
+      return;
+    }
+
+    if (event.target.dataset.year !== undefined) {
+      const year = +event.target.innerText;
+      this.yearToggle(year);
+    }
+
+    if (event.target.dataset.launch !== undefined) {
+      const status = event.target.innerText === 'YES' ? 'true' : 'false';
+      this.launchStatusToggle(status);
+    }
+
+    if (event.target.dataset.land  !== undefined) {
+      const status = event.target.innerText === 'YES' ? 'true' : 'false';
+      this.landStatusToggle(status);
+    }
+  }
+
+  private yearToggle(year) {
     if (this.appliedFilters.year) {
       if (this.appliedFilters.year === year.toString()) {
         year = undefined;
@@ -59,7 +83,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     this.addFiltersAsQueryString();
   }
 
-  launchStatusToggle(isLaunchSuccessFul) {
+  private launchStatusToggle(isLaunchSuccessFul) {
     if (this.appliedFilters.launchSuccess !== undefined) {
       if (this.appliedFilters.launchSuccess === isLaunchSuccessFul.toString()) {
         isLaunchSuccessFul = undefined;
@@ -69,7 +93,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     this.addFiltersAsQueryString();
   }
 
-  landStatusToggle(isLandSuccessful) {
+  private landStatusToggle(isLandSuccessful) {
     if (this.appliedFilters.landSuccess !== undefined) {
       if (this.appliedFilters.landSuccess === isLandSuccessful.toString()) {
         isLandSuccessful = undefined;
@@ -96,11 +120,16 @@ export class FiltersComponent implements OnInit, OnDestroy {
     if (count !== 0) {
       this.yearFilters.push(arr);
     }
+
+    if (this.isPopup) {
+    }
   }
 
   private emmitChanges() {
     this.mainService.setAppliedFilters(this.appliedFilters);
-
+    if (window.innerWidth <= 575 && !this.isPopup) {
+      this.ngOnDestroy();
+    }
   }
 
   private addFiltersAsQueryString() {
